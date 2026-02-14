@@ -1,0 +1,31 @@
+package Simple;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Task1 {
+	public static void main(String[] args) {
+		try {
+			// 1.  Register the driver
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			// 2. Create Connection
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/infoviaan", "root", "Govind");
+			
+			// 3. create statement
+			Statement stmt = con.createStatement();
+			
+			// 4.  Execute Query
+			int i = stmt.executeUpdate("insert into student value('Rizwan', 20, 20)");
+//			int i = stmt.executeUpdate("delete from student where roll = 62");
+			
+			
+			System.out.println(i != 0 ? "Success.." : "Error");
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+	}
+}
