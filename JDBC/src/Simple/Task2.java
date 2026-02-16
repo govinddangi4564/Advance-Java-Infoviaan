@@ -31,7 +31,7 @@ public class Task2 {
 			System.out.println("Enter Rollno : ");
 			int rollno = sc.nextInt();
 			
-			String query = String.format("insert into student(name, roll,age) values ('%s','%d','%d')", name, rollno, age);
+			String query = String.format("insert into student(name, roll,age) values ('%s', %d, %d)", name, rollno, age);
 			
 			int i = stmt.executeUpdate(query);
 			
