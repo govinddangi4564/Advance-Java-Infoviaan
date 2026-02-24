@@ -75,8 +75,6 @@ public class Task3 {
 					int rollno = sc.nextInt();
 					sc.nextLine();
 
-//					int i = stmt.executeUpdate("delete from student where roll = 62");
-
 					String query = String.format("delete from student where roll = %d", rollno);
 
 					int i = stmt.executeUpdate(query);
@@ -98,7 +96,7 @@ public class Task3 {
 					}
 					break;
 				}
-				
+
 				default:
 					System.out.println("Invalid Choice");
 				}
@@ -115,7 +113,7 @@ public class Task3 {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		sc.close();
 	}
 }
