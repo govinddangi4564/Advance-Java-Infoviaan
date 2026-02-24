@@ -41,6 +41,7 @@ gradlew.bat
 .settings/
 .metadata/
 bin/
+.plugins/
 
 ## IntelliJ IDEA
 .idea/
