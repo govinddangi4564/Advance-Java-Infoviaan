@@ -78,6 +78,10 @@ public class StudentController {
 				System.out.println();
 			}
 				break;
+				
+			case 7:
+				System.out.println("Exit.");
+				return;
 
 			default:
 				System.out.println("Exit.");
