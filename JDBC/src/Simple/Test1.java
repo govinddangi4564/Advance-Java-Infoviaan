@@ -29,19 +29,15 @@ public class Test1 {
 	public static Scanner sc = new Scanner(System.in);
 
 	public static int showMenu() {
-		System.out.println("---------------------------------");
+		System.out.println("------------------------------------------------------------------");
 		System.out.println(
 				"Enter 1 for insertion : \nEnter 2 for Updation : \nEnter 3 for Deletion : \nEnter 4 for read data : \nEnter 5 for sort by rollno \nEnter 6 for sort by percentage \nEnter 7 for read with total percentage \nEnter 8 for Exit : ");
-		System.out.println("---------------------------------");
+		System.out.println("------------------------------------------------------------------");
 		return sc.nextInt();
 	}
 
 	public static void insert() {
-
-		System.out.println("Enter student id : ");
-		int id = sc.nextInt();
 		sc.nextLine();
-
 		System.out.println("Enter student name : ");
 		String nm = sc.nextLine();
 
@@ -66,8 +62,8 @@ public class Test1 {
 			Statement stmt = con.createStatement();
 
 			String query = String.format(
-					"insert into students(id, name, age, rollno, hindiMarks, englishMarks, mathsMarks) values (%d, '%s', %d, '%s', %d, %d, %d)",
-					id, nm, age, roll, hM, eM, mM);
+					"insert into students(name, age, rollno, hindiMarks, englishMarks, mathsMarks) values ('%s', %d, '%s', %d, %d, %d)",
+					nm, age, roll, hM, eM, mM);
 
 			int i = stmt.executeUpdate(query);
 
@@ -126,6 +122,10 @@ public class Test1 {
 
 			ResultSet rs = stmt.executeQuery("select * from students");
 
+			System.out.println("--------------------------------------------------------------");
+			System.out.println("Id \tname \tage \troll Number \thM \teM \tmM");
+			System.out.println("--------------------------------------------------------------");
+
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
@@ -148,6 +148,10 @@ public class Test1 {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt.executeQuery("select * from students order by rollno asc");
+
+			System.out.println("--------------------------------------------------------------");
+			System.out.println("Id \tname \tage \troll Number \thM \teM \tmM");
+			System.out.println("--------------------------------------------------------------");
 
 			while (rs.next()) {
 				int id = rs.getInt("id");
@@ -174,6 +178,10 @@ public class Test1 {
 
 			ResultSet rs = stmt.executeQuery(query);
 
+			System.out.println("------------------------------------------------------------------------");
+			System.out.println("Id \tname \tage \troll Number \thM \teM \tmM \tPercentage");
+			System.out.println("------------------------------------------------------------------------");
+
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
@@ -185,7 +193,7 @@ public class Test1 {
 				double per = rs.getDouble("per");
 
 				System.out.println(
-						id + "\t" + name + "\t" + age + "\t" + roll + "\t" + hM + "\t" + eM + "\t" + mM + "\t" + per);
+						id + "\t" + name + "\t" + age + "\t" + roll + "\t" + hM + "\t" + eM + "\t" + mM + "\t" + per + " %");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
