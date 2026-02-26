@@ -32,8 +32,17 @@ public class StudentController {
 			}
 				break;
 
-			case 2:
-				System.out.println("update Query.");
+			case 2: {
+				int roll = view.getStudentRoll();
+				String name = view.getStudentName();
+
+				Student st = new Student();
+				st.setRoll(roll);
+				st.setName(name);
+
+				int i = dao.update(roll, name);
+				System.out.println(i != 0 ? "Success" : "Something went wrong.");
+			}
 				break;
 
 			case 3: {
@@ -42,26 +51,26 @@ public class StudentController {
 				System.out.println(i != 0 ? "Success" : "Something went wrong.");
 			}
 				break;
-				
-			case 4:{
+
+			case 4: {
 				List<Student> list = dao.read();
 				list.forEach((a) -> System.out.println(a));
 				System.out.println();
 			}
-			break;
-			
+				break;
+
 			case 5:
 				System.out.println("Exit.");
 				return;
-				
-			case 6:{
+
+			case 6: {
 				List<Student> list = dao.read();
 				list.sort((a, b) -> a.getRoll() - b.getRoll());
 				list.forEach((a) -> System.out.println(a));
 				System.out.println();
 			}
-			break;
-			
+				break;
+
 			default:
 				System.out.println("Exit.");
 				return;

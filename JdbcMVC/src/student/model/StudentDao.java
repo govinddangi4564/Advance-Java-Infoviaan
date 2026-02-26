@@ -45,6 +45,24 @@ public class StudentDao {
 		return i;
 	}
 
+	// update
+	public int update(int roll, String name) {
+		int i = 0;
+		try {
+			Connection con = getConnection();
+			PreparedStatement pst = con.prepareStatement("update student set name = ? where roll = ?");
+			pst.setString(1, name);
+			pst.setInt(2, roll);
+
+			i = pst.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return i;
+		
+	}
+	
 	// delete
 
 	public int delete(int roll) {
