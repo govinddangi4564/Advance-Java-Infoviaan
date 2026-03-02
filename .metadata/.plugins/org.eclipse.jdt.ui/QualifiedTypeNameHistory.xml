@@ -11,16 +11,17 @@
     <fullyQualifiedTypeName name="Student.model.StudentDao"/>
     <fullyQualifiedTypeName name="Student.view.StudentView"/>
     <fullyQualifiedTypeName name="Student.controller.StudentController"/>
-    <fullyQualifiedTypeName name="java.sql.DriverManager"/>
-    <fullyQualifiedTypeName name="java.sql.SQLException"/>
     <fullyQualifiedTypeName name="java.util.Scanner"/>
     <fullyQualifiedTypeName name="java.util.LinkedList"/>
     <fullyQualifiedTypeName name="java.sql.ResultSet"/>
-    <fullyQualifiedTypeName name="java.sql.Connection"/>
-    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="Bank.model.Bank"/>
     <fullyQualifiedTypeName name="Bank.model.BankDao"/>
     <fullyQualifiedTypeName name="Bank.view.BankView"/>
     <fullyQualifiedTypeName name="Bank.controller.BankController"/>
+    <fullyQualifiedTypeName name="java.lang.Class"/>
+    <fullyQualifiedTypeName name="java.sql.DriverManager"/>
+    <fullyQualifiedTypeName name="java.sql.SQLException"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
 </qualifiedTypeNameHistroy>
