@@ -60,3 +60,15 @@ bin/
 # OS files
 .DS_Store
 Thumbs.db
+
+.metadata/
+bin/
+*.class
+*.log
+*.tmp
+*.bak
+.settings/
+.project
+.classpath
+.gradle/
+build/
