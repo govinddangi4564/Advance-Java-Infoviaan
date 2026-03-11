@@ -25,6 +25,8 @@ public class Task1 {
 		list.stream().filter(a -> a.getSalary() > 50000).forEach(a -> System.out.println(a));
 		System.out.println("----------------------------------------------------------------------");
 		Arrays.stream(arr).filter(a -> a%2 != 0).forEach(a -> System.out.print(a + " "));
+		System.out.println("----------------------------------------------------------------------");
+//		Arrays.stream()
 		
 		
 	}
