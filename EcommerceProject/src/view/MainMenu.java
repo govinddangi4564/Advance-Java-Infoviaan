@@ -8,7 +8,7 @@ public class MainMenu {
 	private Scanner sc = new Scanner(System.in);
 
 	public int showMenu() {
-		System.out.println("---------Menu---------");
+		System.out.println("--------- Main Section ---------");
 		System.out.println("Customer : 1 ");
 		System.out.println("Product  : 2 ");
 		System.out.println("Order    : 3 ");
@@ -22,7 +22,7 @@ public class MainMenu {
 //  Customer
 
 	public int customerMenu() {
-		System.out.println("\n----------- Customer Menu ------------\n");
+		System.out.println("\n----------- Customer Section ------------\n");
 		System.out.println("1 Add Customers : ");
 		System.out.println("2 Remove Customers : ");
 		System.out.println("3 Search customer by Id : ");
@@ -65,7 +65,7 @@ public class MainMenu {
 //  Products
 
 	public int productMenu() {
-		System.out.println("\n----------- Product Menu ------------\n");
+		System.out.println("\n----------- Product Section ------------\n");
 		System.out.println("1 Add Product : ");
 		System.out.println("2 Remove Product : ");
 		System.out.println("3 View Product by Id : ");
@@ -102,7 +102,7 @@ public class MainMenu {
 // Order
 
 	public int orderMenu() {
-		System.out.println("\n----------- Order Menu ------------\n");
+		System.out.println("\n----------- Order Section ------------\n");
 		System.out.println("1 Create Order : ");
 		System.out.println("2 Add Items to Order : ");
 		System.out.println("3 Proceed Order : ");
@@ -133,7 +133,7 @@ public class MainMenu {
 // Payment
 
 	public int paymentMenu() {
-		System.out.println("\n----------- Payment Menu ------------\n");
+		System.out.println("\n----------- Payment Section ------------\n");
 		System.out.println("Enter 1 for Make Payment : ");
 		System.out.println("Enter 2 for Payment Receipt : ");
 		System.out.println("Enter 3 for Previous Menu : ");
@@ -148,7 +148,7 @@ public class MainMenu {
 
 	public String getPaymentMethod() {
 		sc.nextLine();
-		System.out.println("Enter Payment Mode : ");
+		System.out.println("Enter Payment Mode (UPI/Cash/Card : ");
 		return sc.nextLine();
 	}
 
@@ -160,7 +160,7 @@ public class MainMenu {
 // Report
 
 	public int reportMenu() {
-		System.out.println("\n----------- Reports Menu ------------\n");
+		System.out.println("\n----------- Reports Section ------------\n");
 		System.out.println("1 Customer Report : ");
 		System.out.println("2 Product Report : ");
 		System.out.println("3 Order Report : ");
@@ -172,7 +172,7 @@ public class MainMenu {
 // Customer Update Menu
 
 	public int updateCustomer() {
-		System.out.println("\n----------- Update Menu ------------\n");
+		System.out.println("\n----------- Update Section ------------\n");
 		System.out.println("1 Update Name");
 		System.out.println("2 Update Phone");
 		System.out.println("3 Update Address");
@@ -183,7 +183,7 @@ public class MainMenu {
 // Product Update Menu
 
 	public int updateProduct() {
-		System.out.println("\n----------- Update Menu ------------\n");
+		System.out.println("\n----------- Update Section ------------\n");
 		System.out.println("1 Update Name");
 		System.out.println("2 Update Price");
 		System.out.println("3 Update Category");

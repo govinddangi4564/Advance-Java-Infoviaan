@@ -32,6 +32,7 @@ public class ReportController {
 
 			case 1: {
 				List<Customer> customersReport = cd.customerReport();
+				System.out.println("\nCustomers Report : ");
 				System.out.println("\n----------------------------------------------------------------------------");
 				System.out.printf("%-5s %-15s %-15s %-20s %-12s\n", "ID", "Name", "Phone", "Address", "Created Date");
 				System.out.println("------------------------------------------------------------------------------");
@@ -48,13 +49,14 @@ public class ReportController {
 
 			case 2: {
 				List<Product> productsReport = pd.productReport();
-				System.out.println("\n---------------------------------------------------------------------");
-				System.out.printf("%-5s %-15s %-15s %-8s %-20s %-12s\n", "ID", "Product Name", "Price", "Stock",
+				System.out.println("\nProduct Report");
+				System.out.println("\n-----------------------------------------------------------------------------------------");
+				System.out.printf("%-8s %-10s %-20s %-8s %-20s %-12s\n", "ID", "Product Name", "Price", "Stock",
 						"Category", "Created Date");
-				System.out.println("-----------------------------------------------------------------------");
+				System.out.println("-------------------------------------------------------------------------------------------");
 
 				for (Product p : productsReport) {
-					System.out.printf("%-5s %-15s %-15s %-8s %-20s %-12s\n", p.getProductId(), p.getProductName(),
+					System.out.printf("%-8s %-10s %-20s %-8s %-20s %-12s\n", p.getProductId(), p.getProductName(),
 							p.getProductPrice(), p.getProductStock(), p.getProductCategory(),
 							p.getProductCreatedDate());
 				}
@@ -65,7 +67,15 @@ public class ReportController {
 
 			case 3: {
 				List<Order> ordersReport = od.orderReport();
-				ordersReport.forEach(System.out::println);
+				System.out.println("\nOrder Report : ");
+				System.out.println("\n------------------------------------------------------------------------------------");
+				System.out.printf("%-7s %-16s %-22s %-15s %-15s\n", "Id", "CustomerId","Order Date", "Amount", "Status");
+				System.out.println("------------------------------------------------------------------------------------");
+				
+				for(Order o : ordersReport) {
+					System.out.printf("%-7s %-16s %-22s %-15s %-15s\n",o.getOrderId(), o.getCustomerId(),o.getOrderDate(), o.getOrderAmount(),o.getOrderStatus());
+				}
+				System.out.println("\nTotal Orders : " + ordersReport.size());
 				System.out.println();
 			}
 				break;

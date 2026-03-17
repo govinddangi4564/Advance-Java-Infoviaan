@@ -16,35 +16,43 @@ public class ProductDAO {
 // Add product
 
 	public int addProduct(Product pro) {
-		int i = 0;
+		int proId = 0;
 
 		try {
 			Connection con = DBConnection.getConnection();
 			PreparedStatement pst = con.prepareStatement(
-					"insert into products (product_name, price, stock_quantity, category,created_at) values(?,?,?,?,?)");
+					"insert into products (product_name, price, stock_quantity, category,created_at) values(?,?,?,?,?)",
+					PreparedStatement.RETURN_GENERATED_KEYS);
 			pst.setString(1, pro.getProductName());
 			pst.setDouble(2, pro.getProductPrice());
 			pst.setInt(3, pro.getProductStock());
 			pst.setString(4, pro.getProductCategory());
 			pst.setDate(5, pro.getProductCreatedDate());
 
-			i = pst.executeUpdate();
+			pst.executeUpdate();
+
+			ResultSet rs = pst.getGeneratedKeys();
+
+			while (rs.next()) {
+				proId = rs.getInt(1);
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return i;
+		return proId;
 	}
 
 // Remove Product
 
-	public int removeProduct(int id) {
+	public int removeProduct(int id, int qty) {
 		int i = 0;
 
 		try {
 			Connection con = DBConnection.getConnection();
-			PreparedStatement pst = con.prepareStatement("Delete from products where product_id = ?");
-			pst.setInt(1, id);
+			PreparedStatement pst = con.prepareStatement("Update products set stock_quantity = stock_quantity - ? where product_id = ?");
+			pst.setInt(1, qty);
+			pst.setInt(2, id);
 
 			i = pst.executeUpdate();
 
@@ -208,7 +216,7 @@ public class ProductDAO {
 			pst.setInt(1, proId);
 			ResultSet rs = pst.executeQuery();
 
-			if (rs.next()) {
+			while (rs.next()) {
 				name = rs.getString("product_name");
 			}
 
@@ -219,4 +227,24 @@ public class ProductDAO {
 		return name;
 	}
 
+// get stock
+
+	public int getStock(int proId) {
+		int stock = 0;
+
+		try {
+			Connection con = DBConnection.getConnection();
+			PreparedStatement pst = con.prepareStatement("select stock_quantity from products where product_id = ?");
+			pst.setInt(1, proId);
+
+			ResultSet rs = pst.executeQuery();
+
+			while (rs.next()) {
+				stock = rs.getInt("stock_quantity");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return stock;
+	}
 }

@@ -37,8 +37,9 @@ public class CustomerController {
 
 				Customer cust = new Customer(name, phNo, add, dt);
 
-				int i = custDao.addCustomer(cust);
-				System.out.println(i != 0 ? "Success" : "Something went wrong.");
+				int custId = custDao.addCustomer(cust);
+				System.out.println(custId != 0 ? "Success" : "Something went wrong.");
+				System.out.println("Your Customer Id : " + custId);
 			}
 				break;
 

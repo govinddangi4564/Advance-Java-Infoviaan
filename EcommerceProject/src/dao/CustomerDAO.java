@@ -17,25 +17,31 @@ public class CustomerDAO {
 // Add Customers
 
 	public int addCustomer(Customer cust) {
-		int i = 0;
+		int custId = 0;
 
 		try {
 			Connection con = DBConnection.getConnection();
 			PreparedStatement pst = con
-					.prepareStatement("insert into customers(name, phone_number, address, created_at) values(?,?,?,?)");
+					.prepareStatement("insert into customers(name, phone_number, address, created_at) values(?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
 
 			pst.setString(1, cust.getCustomerName());
 			pst.setString(2, cust.getCustomerNumber());
 			pst.setString(3, cust.getCustomerAddress());
 			pst.setDate(4, cust.getCustomerCreatedDate());
 
-			i = pst.executeUpdate();
+			pst.executeUpdate();
+			
+			ResultSet rs = pst.getGeneratedKeys();
+			
+			while(rs.next()) {
+				custId = rs.getInt(1);
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return i;
+		return custId;
 	}
 
 // Remove Customer

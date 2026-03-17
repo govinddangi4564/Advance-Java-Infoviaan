@@ -28,21 +28,34 @@ public class ProductController {
 			case 1: {
 				String name = view.getProductName();
 				double price = view.getAmount();
+				int stock = view.getOrderQuantity();
 				String cat = view.getProductCategory();
 				Date dt = view.getDate();
 
-				Product pro = new Product(name, price, proChoice, cat, dt);
+				Product pro = new Product(name, price, stock, cat, dt);
 
-				int i = proDao.addProduct(pro);
-				System.out.println(i != 0 ? "Success" : "Something went wrong.");
+				int proId = proDao.addProduct(pro);
+				System.out.println(proId != 0 ? "Success" : "Something went wrong.");
+				System.out.println("Your Product id : " + proId);
 			}
 				break;
 
 			case 2: {
-				int id = view.getProductId();
+			    int id = view.getProductId();
+			    int stock = proDao.getStock(id);
 
-				int i = proDao.removeProduct(id);
-				System.out.println(i != 0 ? "Success" : "Something went wrong.");
+			    System.out.println("Total Available Stock : " + stock);
+
+			    int choice = view.getOrderQuantity();
+
+			    if (choice > stock) {
+			        System.out.println("Not enough stock available!");
+			        break;
+			    }
+
+			    int i = proDao.removeProduct(id, choice);
+
+			    System.out.println(i != 0 ? "Success" : "Something went wrong.");
 			}
 				break;
 

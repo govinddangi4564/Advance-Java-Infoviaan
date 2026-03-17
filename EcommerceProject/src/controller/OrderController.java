@@ -4,9 +4,12 @@ import java.sql.Date;
 import java.util.List;
 
 import dao.OrderDAO;
+import dao.PaymentDAO;
+import dao.ProductDAO;
 import model.Customer;
 import model.Order;
 import model.OrderItem;
+import model.Payment;
 import view.MainMenu;
 
 public class OrderController {
@@ -14,6 +17,9 @@ public class OrderController {
 	public MainMenu view;
 	public OrderDAO odrDao;
 	public OrderItem odrItm;
+
+	ProductDAO proDao = new ProductDAO();
+	PaymentDAO payDao = new PaymentDAO();
 
 	public OrderController(MainMenu view, OrderDAO odrDao) {
 		this.view = view;
@@ -40,9 +46,9 @@ public class OrderController {
 
 				Order ord = new Order(custId, 0, dt, sts);
 
-				int i = odrDao.createOrder(ord);
-				System.out.println(i != 0 ? "Success" : "Something went wrong.");
-				System.out.println("Your order Id : ");
+				int orderId = odrDao.createOrder(ord);
+				System.out.println(orderId != 0 ? "Success" : "Something went wrong.");
+				System.out.println("Your order Id : " + orderId);
 			}
 				break;
 
@@ -57,8 +63,9 @@ public class OrderController {
 				OrderItem item = new OrderItem(odrId, proId, quantity, price);
 
 				int i = odrDao.addItems(item);
+				int j = proDao.removeProduct(proId, quantity);
 				System.out.println("Subtotal = " + subtotal);
-				System.out.println(i != 0 ? "Success" : "Something went wrong.");
+				System.out.println((i != 0 && j != 0) ? "Success" : "Something went wrong.");
 			}
 				break;
 
@@ -90,7 +97,7 @@ public class OrderController {
 				break;
 
 			case 5: {
-				System.out.println("Please complete Payment..");
+				System.out.println("Please Complete Payment First.");
 			}
 				break;
 
@@ -104,7 +111,7 @@ public class OrderController {
 			case 7: {
 				System.out.println("Exit.");
 			}
-				break;
+				return;
 
 			default:
 				System.out.println("Invalid choice.");

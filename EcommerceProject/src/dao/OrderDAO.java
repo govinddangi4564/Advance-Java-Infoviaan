@@ -17,24 +17,30 @@ public class OrderDAO {
 //  Create order
 
 	public int createOrder(Order odr) {
-		int i = 0;
+		int orderId = 0;
 
 		try {
 			Connection con = DBConnection.getConnection();
 			PreparedStatement pst = con.prepareStatement(
-					"insert into orders (customer_id, order_date, total_amount, status) values(?,?,?,?)");
+					"insert into orders (customer_id, order_date, total_amount, status) values(?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
 			pst.setInt(1, odr.getCustomerId());
 			pst.setDate(2, odr.getOrderDate());
 			pst.setDouble(3, odr.getOrderAmount());
 			pst.setString(4, odr.getOrderStatus());
 
-			i = pst.executeUpdate();
+			pst.executeUpdate();
 
+			ResultSet rs = pst.getGeneratedKeys();
+			
+			while(rs.next()) {
+				orderId = rs.getInt(1);
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return i;
+		return orderId;
 	}
 
 // Add items to order 
@@ -267,7 +273,7 @@ public class OrderDAO {
 		return list;
 	}
 
-	// Get payment id by order id
+// Get payment id by order id
 
 	public int proId(int odrId) {
 		int id = 0;

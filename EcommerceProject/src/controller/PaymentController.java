@@ -59,9 +59,12 @@ public class PaymentController {
 //					}
 
 					else {
-						String mode = view.getPaymentMethod();
 						Date dt = view.getDate();
 						double amt = payDao.getTotal(odrId);
+						
+						System.out.println("Total Bill : " + amt);
+						
+						String mode = view.getPaymentMethod();
 						String sts = "PAID";
 
 						Payment payment = new Payment(odrId, amt, mode, dt, sts);
@@ -78,21 +81,17 @@ public class PaymentController {
 				// Order Details
 
 				int odrId = view.getOrderId();
-				int custId = custDao.custId(odrId);
-				int proId = odrDao.proId(odrId);
-
-				List<Order> odrReceipt = odrDao.orderReport(odrId);
-				List<Customer> custList = custDao.viewCustomer(custId);
-				List<OrderItem> itemList = odrDao.orderItem(odrId);
-				String productName = proDao.productName(proId);
-				List<Payment> receipt = payDao.paymentReceipt(odrId);
 
 				System.out.println("\n___________________  Receipt _______________________\n");
 
+				List<Order> odrReceipt = odrDao.orderReport(odrId);
 				for (Order o : odrReceipt) {
 					System.out.println("Order Id   : " + o.getOrderId());
 					System.out.println("Order Date : " + o.getOrderDate());
 				}
+				
+				int custId = custDao.custId(odrId);
+				List<Customer> custList = custDao.viewCustomer(custId);
 				for (Customer c : custList) {
 					System.out.println("Customer   : " + c.getCustomerName());
 					System.out.println("Address    : " + c.getCustomerAddress());
@@ -103,6 +102,9 @@ public class PaymentController {
 				System.out.printf("%-20s %-10s %-15s %-12s\n", "Product Name", "Quantity", "Price", "Subtotal");
 				System.out.println("-------------------------------------------------------------");
 
+				int proId = odrDao.proId(odrId);
+				List<OrderItem> itemList = odrDao.orderItem(odrId);
+				String productName = proDao.productName(proId);
 				double total = 0;
 				for (OrderItem o : itemList) {
 					double subtotal = o.getOrderItemPrice() * o.getOrderItemQuantity();
@@ -114,6 +116,7 @@ public class PaymentController {
 				System.out.println("Total Amount : " + total);
 				System.out.println();
 
+				List<Payment> receipt = payDao.paymentReceipt(odrId);
 				for (Payment p : receipt) {
 					System.out.println("Payment Method  : " + p.getPaymentMethod());
 					System.out.println("Payment Status  : " + p.getPaymentStatus());
